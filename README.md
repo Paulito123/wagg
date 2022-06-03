@@ -2,9 +2,10 @@
 Crypto wallet aggregator for calculating total holdings and their values
 
 # TODO
- - Dockerfile
- - Docker compose file
- - Python webserver
- - webcrawler
-   - holdings
-   - prices
+ - [X] Dockerfile
+ - [ ] Docker compose file
+ - [ ] Python webserver
+ - [ ] tinyDB
+ - [ ] webcrawler
+   - [X] holdings
+   - [ ] prices

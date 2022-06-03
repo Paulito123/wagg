@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hello_flask
+      - POSTGRES_PASSWORD=hello_flask
+      - POSTGRES_DB=hello_flask_dev
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    hostname: chrome
+    privileged: true
+    depends_on:
+      - db
+    shm_size: 2g
+
+  crawler:
+    build: ./crawler
+    hostname: crawler
+    command: python crawler/app.py
+    volumes:
+      - .:/usr/src/app/
+    depends_on:
+      - db
+      - chrome
+    env_file:
+      - ./.env
+
+volumes:
+  postgres_data_dev:
